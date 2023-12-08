@@ -87,7 +87,7 @@ const CoverImg = styled.div<CoverImgProps>`
   background-position: center;
 `;
 
-const DeleteButton = styled.button`
+export const DeleteButton = styled.button`
   position: absolute;
   top: 15px;
   right: 15px;

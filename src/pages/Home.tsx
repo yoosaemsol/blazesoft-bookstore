@@ -7,6 +7,7 @@ import BookCardItem from 'components/BookCardItem';
 import { Button, Page } from 'components/ui';
 import { flexbox } from 'styles/utils';
 import initialBookList from 'mock/initialBookList.json';
+import BookListItem from 'components/BookListItem';
 
 export default function Home() {
   const [viewType, setViewType] = useState<'card' | 'list'>('card');
@@ -41,7 +42,7 @@ export default function Home() {
           viewType === 'card' ? (
             <BookCardItem key={book.id} book={book} />
           ) : (
-            <div>{book.title}</div>
+            <BookListItem key={book.id} book={book} />
           )
         )}
       </BooksContainer>
