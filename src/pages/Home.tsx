@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import styled from 'styled-components';
 import { BsList } from 'react-icons/bs';
 import { MdOutlineGridView } from 'react-icons/md';
@@ -8,9 +10,13 @@ import { Button, Page } from 'components/ui';
 import { flexbox } from 'styles/utils';
 import initialBookList from 'mock/initialBookList.json';
 import BookListItem from 'components/BookListItem';
+import { init, RootState } from 'store/store';
 
 export default function Home() {
   const [viewType, setViewType] = useState<'card' | 'list'>('card');
+
+  const booklist = useSelector((state: RootState) => state.booklist);
+  const dispatch = useDispatch();
 
   const handleViewTypeChange = (type: 'card' | 'list') => {
     setViewType(type);
@@ -20,6 +26,10 @@ export default function Home() {
     // Add logic for adding a book
     console.log('clicked');
   };
+
+  useEffect(() => {
+    dispatch(init(initialBookList));
+  }, [dispatch]);
 
   return (
     <Page>
@@ -38,7 +48,7 @@ export default function Home() {
         <Button onClick={handleAddBookClick}>ADD BOOK</Button>
       </ControlsContainer>
       <BooksContainer $viewType={viewType}>
-        {initialBookList?.map((book) =>
+        {booklist?.map((book) =>
           viewType === 'card' ? (
             <BookCardItem key={book.id} book={book} />
           ) : (

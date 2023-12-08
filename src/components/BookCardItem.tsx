@@ -3,15 +3,7 @@ import styled from 'styled-components';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { Label } from './ui';
 import { flexbox } from 'styles/utils';
-
-export interface IBook {
-  id: number;
-  title: string;
-  category: string;
-  price: string;
-  description: string;
-  coverURL?: string;
-}
+import { IBook } from 'store/store';
 
 interface BookListItemProps {
   book: IBook;

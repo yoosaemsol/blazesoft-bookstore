@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 
-import { DeleteButton, IBook } from './BookCardItem';
+import { DeleteButton } from './BookCardItem';
+import { IBook } from 'store/store';
 
 import { Label } from './ui';
 import { flexbox } from 'styles/utils';
