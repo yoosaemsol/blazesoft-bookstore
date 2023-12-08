@@ -15,4 +15,5 @@ const LabelComponent = styled.div`
   border-radius: 2px;
   font-size: 13px;
   font-weight: 600;
+  width: fit-content;
 `;

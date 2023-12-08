@@ -4,6 +4,7 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { Label } from './ui';
 import { flexbox } from 'styles/utils';
 import { IBook } from 'store/store';
+import { useNavigate } from 'react-router';
 
 interface BookListItemProps {
   book: IBook;
@@ -15,8 +16,11 @@ interface CoverImgProps {
 
 export default function BookCardItem({ book }: BookListItemProps) {
   const { id, title, price, category, coverURL = '' } = book;
+  const navigate = useNavigate();
 
-  const handleBookClick = (id: number) => {};
+  const handleBookClick = (id: number) => {
+    navigate(`/${id}`);
+  };
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
