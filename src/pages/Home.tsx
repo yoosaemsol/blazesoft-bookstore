@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { BsList } from 'react-icons/bs';
 import { MdOutlineGridView } from 'react-icons/md';
 
+import BookCardItem from 'components/BookCardItem';
 import { Button, Page } from 'components/ui';
 import { flexbox } from 'styles/utils';
+import initialBookList from 'mock/initialBookList.json';
 
 export default function Home() {
   const [viewType, setViewType] = useState<'card' | 'list'>('card');
@@ -34,6 +36,15 @@ export default function Home() {
         </ViewTypeIcons>
         <Button onClick={handleAddBookClick}>ADD BOOK</Button>
       </ControlsContainer>
+      <BooksContainer $viewType={viewType}>
+        {initialBookList?.map((book) =>
+          viewType === 'card' ? (
+            <BookCardItem key={book.id} book={book} />
+          ) : (
+            <div>{book.title}</div>
+          )
+        )}
+      </BooksContainer>
     </Page>
   );
 }
@@ -67,4 +78,32 @@ const ControlsContainer = styled.div`
   padding: 10px;
   border: 2px solid var(--color-light-level1);
   border-radius: 5px;
+`;
+
+const BooksContainer = styled.ul<{ $viewType: 'card' | 'list' }>`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  ${({ $viewType }) =>
+    $viewType === 'card' &&
+    `
+    @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  `}
+
+  ${({ $viewType }) =>
+    $viewType === 'list' &&
+    `
+    grid-template-columns: repeat(1, 1fr);
+  `}
 `;
