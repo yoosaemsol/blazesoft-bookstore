@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "title": "Atomic Habits",
+    "category": "Business",
+    "price": "36.00",
+    "description": "The #1 New York Times bestseller. Over 10 million copies sold!\n\nTiny Changes, Remarkable Results\n\nNo matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897931/atomic-habit_jg6mbh.avif"
+  },
+  {
+    "id": 2,
+    "title": "HOLLY",
+    "category": "Fiction",
+    "price": "39.99",
+    "description": "Holly Gibney, one of Stephen King’s most compelling and ingeniously resourceful characters, returns in this thrilling novel to solve the gruesome truth behind multiple disappearances in a midwestern town.",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701981759/holly_e7ppkh.avif"
+  },
+  {
+    "id": 3,
+    "title": "A MAN CALLED OVE",
+    "category": "Fiction",
+    "price": "19.99",
+    "description": "NOW A MAJOR FILM STARRING TOM HANKS\n\nThe million-copy bestselling phenomenon: a funny, moving, uplifting tale of love and community that will leave you with a spring in your step.\n\n'Warm, funny, and almost unbearably moving' Daily Mail\n\n'Delightful . . . the perfect holiday read' Evening Standard",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701896719/a-man-called-ove_faaany.avif"
+  },
+  {
+    "id": 4,
+    "title": "Quietly Hostile",
+    "category": "Essays",
+    "price": "19.99",
+    "description": "A hilarious new essay collection from Samantha Irby engages readers with her characteristic combination of laugh-out-loud moments, heartfelt passages and plenty of awkward experiences.... Quietly Hostile will delight established fans and newcomers alike (Parade).",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701895649/quietly-hostile_ybiqjd.avif"
+  },
+  {
+    "id": 5,
+    "title": "Felling Seen",
+    "category": "Self-Help",
+    "price": "24.99",
+    "description": "Staying connected in this human race is the most direct route to happiness. But never have we been more disconnected. A call to simply connect isn’t enough any longer. Connection is what we’re wired for, and it can be easy: waving at your neighbour, going on that second date, buying coffee for the person behind you.\n\nAs simple as it is complex, it all comes down to this truth: when we’re feeling seen, we will rise.",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897908/feeling-seen_wecxwl.avif"
+  },
+  {
+    "id": 6,
+    "title": "Hidden Potential",
+    "category": "Business",
+    "price": "33.60",
+    "description": "“This brilliant book will shatter your assumptions about what it takes to improve and succeed. I wish I could go back in time and gift it to my younger self. It would’ve helped me find a more joyful path to progress.”—Serena Williams, 23-time Grand Slam singles tennis champion",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701895657/hiddenPotential_kxlvcr.avif"
+  },
+  {
+    "id": 7,
+    "title": "Enchantment",
+    "category": "Business",
+    "price": "36.00",
+    "description": "“When I tell you that I dogeared almost every page in this book, I'm telling God's honest truth. I didn't know how much I needed someone else to validate what I was going through. The sense that I had lost my curiosity, my imagination, my ability to make meaning.” – NPR Morning Edition host Rachel Martin",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897926/enchantment_hfxkmp.avif"
+  },
+  {
+    "id": 8,
+    "title": "A Novel",
+    "category": "Fiction",
+    "price": "27.99",
+    "description": "In the early 1960s, Andy Warhol set out to turn the novel into pop art. a, the first book he wrote, is the result. Transcribed from audiotapes recorded in and around his legendary art studio, it begins with the actor Ondine popping pills, then follows a cast of thinly-disguised superstars, musicians and prima donnas as they run riot through Manhattan. A knowing response to James Joyce's Ulysses, using the freewheeling, spontaneous techniques as Warhol's visual art, this filthy, funny book is a uniquely creative insight into Factory life.",
+    "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897119/a-novel_sgefvt.jpg"
+  }
+]
