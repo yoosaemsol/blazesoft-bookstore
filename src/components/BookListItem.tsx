@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 import { DeleteButton } from './BookCardItem';
-import { IBook } from 'store/store';
+import { IBook, remove } from 'store/store';
 
 import { Label } from './ui';
 import { flexbox } from 'styles/utils';
@@ -26,6 +27,7 @@ export default function BookListItem({ book }: BookListItemProps) {
   const { isCoverLoading, isCoverAvailable } = useImageLoading(coverURL);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleBookClick = (id: number) => {
     navigate(`/${id}`);
@@ -33,6 +35,13 @@ export default function BookListItem({ book }: BookListItemProps) {
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    const shouldDelete = window.confirm(
+      'Are you sure you want to delete this book?'
+    );
+
+    if (shouldDelete) {
+      dispatch(remove(id));
+    }
   };
 
   return (

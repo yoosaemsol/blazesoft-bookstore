@@ -8,14 +8,6 @@
     "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897931/atomic-habit_jg6mbh.avif"
   },
   {
-    "id": 11,
-    "title": "Hello Habits",
-    "category": "Business",
-    "price": "36.00",
-    "description": "The #1 New York Times bestseller. Over 10 million copies sold!\n\nTiny Changes, Remarkable Results\n\nNo matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.",
-    "coverURL": ""
-  },
-  {
     "id": 2,
     "title": "HOLLY",
     "category": "Fiction",
@@ -48,7 +40,7 @@
     "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897908/feeling-seen_wecxwl.avif"
   },
   {
-    "id": 6,
+    "id": 7,
     "title": "Hidden Potential",
     "category": "Business",
     "price": "33.60",
@@ -56,7 +48,15 @@
     "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701895657/hiddenPotential_kxlvcr.avif"
   },
   {
-    "id": 7,
+    "id": 6,
+    "title": "Hello Habits",
+    "category": "Fiction",
+    "description": "Bearded, bad-boy barber Knox prefers to live his life the way he takes his coffee: Alone. Unless you count his basset hound, Waylon.\n\nKnox doesn’t tolerate drama, even when it comes in the form of a stranded runaway bride.",
+    "price": "23.17",
+    "coverURL": ""
+  },
+  {
+    "id": 8,
     "title": "Enchantment",
     "category": "Business",
     "price": "36.00",
@@ -64,11 +64,19 @@
     "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897926/enchantment_hfxkmp.avif"
   },
   {
-    "id": 8,
+    "id": 9,
     "title": "A Novel",
     "category": "Fiction",
     "price": "27.99",
     "description": "In the early 1960s, Andy Warhol set out to turn the novel into pop art. a, the first book he wrote, is the result. Transcribed from audiotapes recorded in and around his legendary art studio, it begins with the actor Ondine popping pills, then follows a cast of thinly-disguised superstars, musicians and prima donnas as they run riot through Manhattan. A knowing response to James Joyce's Ulysses, using the freewheeling, spontaneous techniques as Warhol's visual art, this filthy, funny book is a uniquely creative insight into Factory life.",
     "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897119/a-novel_sgefvt.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Lessons in Chemistry",
+    "category": "Essays",
+    "price": "24.95",
+    "description": "Chemist Elizabeth Zott is not your average woman. In fact, Elizabeth Zott would be the first to point out that there is no such thing as an average woman. But it's the early 1960s and her all-male team at Hastings Research Institute takes a very unscientific view of equality. Except for one: Calvin Evans, the lonely, brilliant, Nobel Prize–nominated grudge holder who falls in love with—of all things—her mind. True chemistry results.",
+    "coverURL": ""
   }
 ]

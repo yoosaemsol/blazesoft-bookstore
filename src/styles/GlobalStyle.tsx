@@ -17,6 +17,8 @@ const GlobalStyle = createGlobalStyle`
     --color-primary: #00074E;
     --color-primary-active: #121429;
     --color-accent: #F38428;
+    
+
   }
 
   html {

@@ -6,15 +6,17 @@ import { BsList } from 'react-icons/bs';
 import { MdOutlineGridView } from 'react-icons/md';
 
 import BookCardItem from 'components/BookCardItem';
-import { Button, Page } from 'components/ui';
+import { Button, Modal, Page } from 'components/ui';
 import { flexbox } from 'styles/utils';
 import initialBookList from 'mock/initialBookList.json';
 import BookListItem from 'components/BookListItem';
 import { init, RootState } from 'store/store';
 import DetailModal from 'components/DetailModal';
+import BookForm from 'components/BookForm';
 
 export default function Home() {
   const [viewType, setViewType] = useState<'card' | 'list'>('card');
+  const [onAddForm, setOnAddForm] = useState(false);
 
   const booklist = useSelector((state: RootState) => state.booklist);
   const dispatch = useDispatch();
@@ -24,8 +26,7 @@ export default function Home() {
   };
 
   const handleAddBookClick = () => {
-    // Add logic for adding a book
-    console.log('clicked');
+    setOnAddForm(true);
   };
 
   useEffect(() => {
@@ -58,6 +59,11 @@ export default function Home() {
         )}
       </BooksContainer>
       <DetailModal />
+      {onAddForm && (
+        <Modal onClose={() => setOnAddForm(false)}>
+          <BookForm onClose={() => setOnAddForm(false)} />
+        </Modal>
+      )}
     </Page>
   );
 }

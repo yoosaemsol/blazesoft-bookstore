@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 
-import { IBook } from 'store/store';
+import { IBook, remove } from 'store/store';
 import { Label } from './ui';
 import { flexbox } from 'styles/utils';
 import { stringToColor } from 'common/utils/stringToColor';
@@ -22,8 +23,8 @@ export default function BookCardItem({ book }: BookListItemProps) {
   const { id, title, price, category, coverURL = '' } = book;
 
   const { isCoverLoading, isCoverAvailable } = useImageLoading(coverURL);
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleBookClick = (id: number) => {
     navigate(`/${id}`);
@@ -31,6 +32,13 @@ export default function BookCardItem({ book }: BookListItemProps) {
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    const shouldDelete = window.confirm(
+      'Are you sure you want to delete this book?'
+    );
+
+    if (shouldDelete) {
+      dispatch(remove(id));
+    }
   };
 
   return (
@@ -65,6 +73,12 @@ const BookCardItemComponent = styled.li`
     font-weight: 700;
     margin-top: 16px;
     margin-bottom: 10px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    width: 200px;
+    text-align: center;
+    text-overflow: ellipsis;
   }
 
   p {
