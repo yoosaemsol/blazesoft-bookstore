@@ -48,8 +48,8 @@ export default function BookForm({
       dispatch(
         edit({
           id: book.id,
-          title: data.title,
-          category: data.category,
+          title: data.title?.trim(),
+          category: data.category?.trim(),
           price: data.price.toString(),
           description: data.description,
           coverURL: data?.coverURL,
@@ -65,8 +65,8 @@ export default function BookForm({
       dispatch(
         add({
           id,
-          title: data.title,
-          category: data.category,
+          title: data.title?.trim(),
+          category: data.category?.trim(),
           price: data.price.toString(),
           description: data.description,
           coverURL: data?.coverURL,
@@ -76,6 +76,11 @@ export default function BookForm({
       onClose && onClose();
       navigate(`/${id}`);
     }
+  };
+
+  const customValidation = (value: string) => {
+    const isValid = value?.trim()?.length > 0;
+    return isValid;
   };
 
   return (
@@ -90,7 +95,9 @@ export default function BookForm({
               id="title"
               required
               $isError={!!errors?.title}
-              {...register('title', { required: true })}
+              {...register('title', {
+                validate: customValidation,
+              })}
             />
             {errors?.title && <Error>Please provide a title</Error>}
           </FormBlock>
@@ -101,7 +108,9 @@ export default function BookForm({
               id="category"
               required
               $isError={!!errors?.category}
-              {...register('category', { required: true })}
+              {...register('category', {
+                validate: customValidation,
+              })}
             />
             {errors?.category && <Error>Please provide a category</Error>}
           </FormBlock>
@@ -111,7 +120,9 @@ export default function BookForm({
               id="description"
               required
               $isError={!!errors?.description}
-              {...register('description', { required: true })}
+              {...register('description', {
+                validate: customValidation,
+              })}
             />
             {errors?.description && <Error>Please provide a description</Error>}
           </FormBlock>
@@ -122,7 +133,9 @@ export default function BookForm({
               id="price"
               required
               $isError={!!errors?.price}
-              {...register('price', { required: true })}
+              {...register('price', {
+                required: true,
+              })}
             />
             {errors?.price && <Error>Please provide a price</Error>}
           </FormBlock>
