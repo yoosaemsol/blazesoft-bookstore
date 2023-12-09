@@ -27,6 +27,9 @@ const booklist = createSlice({
         Object.assign(bookToUpdate, updatedFields);
       }
     },
+    remove: (state, action: PayloadAction<number>) => {
+      return state.filter((book) => book.id !== action.payload);
+    },
   },
 });
 
@@ -36,7 +39,7 @@ const store = configureStore({
   },
 });
 
-export const { init, add, edit } = booklist.actions;
+export const { init, add, edit, remove } = booklist.actions;
 
 export type RootState = ReturnType<typeof store.getState>;
 
