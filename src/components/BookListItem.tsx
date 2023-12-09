@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { useNavigate } from 'react-router';
 
 import { DeleteButton } from './BookCardItem';
 import { IBook } from 'store/store';
 
 import { Label } from './ui';
 import { flexbox } from 'styles/utils';
+
+import { stringToColor } from 'common/utils/stringToColor';
+import { extractTitleAndFormat } from 'common/utils/extractTitleAndFormat';
+import { useImageLoading } from 'common/hooks/useImageLoading';
 
 interface BookListItemProps {
   book: IBook;
@@ -18,7 +23,13 @@ interface CoverImgProps {
 export default function BookListItem({ book }: BookListItemProps) {
   const { id, title, price, category, description, coverURL = '' } = book;
 
-  const handleBookClick = (id: number) => {};
+  const { isCoverLoading, isCoverAvailable } = useImageLoading(coverURL);
+
+  const navigate = useNavigate();
+
+  const handleBookClick = (id: number) => {
+    navigate(`/${id}`);
+  };
 
   const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -26,7 +37,16 @@ export default function BookListItem({ book }: BookListItemProps) {
 
   return (
     <BookListItemComponent onClick={() => handleBookClick(id)}>
-      <div>{!!coverURL && <CoverImg $imageUrl={coverURL} />}</div>
+      <div>
+        {!isCoverLoading && isCoverAvailable && (
+          <CoverImg $imageUrl={coverURL} />
+        )}
+        {!isCoverLoading && !isCoverAvailable && (
+          <CoverText $bg={stringToColor(title)}>
+            <div>{extractTitleAndFormat(title)}</div>
+          </CoverText>
+        )}
+      </div>
       <div>
         <h3>{title}</h3>
         <Label>{category}</Label>
@@ -104,4 +124,23 @@ const CoverImg = styled.div<CoverImgProps>`
   background-image: url(${(props) => props.$imageUrl});
   background-size: cover;
   background-position: center;
+`;
+
+const CoverText = styled.div<{ $bg: string }>`
+  ${flexbox()};
+  width: 161px;
+  height: 226px;
+  border-radius: 10px;
+  background-color: ${(props) => stringToColor(props.$bg)};
+
+  & > div {
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    line-height: 100px;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 800;
+  }
 `;

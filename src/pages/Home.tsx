@@ -11,6 +11,7 @@ import { flexbox } from 'styles/utils';
 import initialBookList from 'mock/initialBookList.json';
 import BookListItem from 'components/BookListItem';
 import { init, RootState } from 'store/store';
+import DetailModal from 'components/DetailModal';
 
 export default function Home() {
   const [viewType, setViewType] = useState<'card' | 'list'>('card');
@@ -56,6 +57,7 @@ export default function Home() {
           )
         )}
       </BooksContainer>
+      <DetailModal />
     </Page>
   );
 }
