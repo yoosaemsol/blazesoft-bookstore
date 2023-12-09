@@ -1,7 +1,12 @@
 # **Frontend Developer Test for Blazesoft**
 
-## **Project Overview**
+## About Project
+- [Link to App](https://blazesoft-bookstore-selena.netlify.app/) 🌎
 
+- [Link to Notion](https://sheer-crab-cbb.notion.site/Book-Store-d2a468d9f2dd4a2d8686ad02f589da31) 📖
+
+
+## **Project Overview**
 This project is a single-page application developed using React, Redux, and Server Side Rendering (SSR). The goal is to create a bookstore where users can view a list of books, add new books, modify existing book details, and delete books. The application uses Redux for state management and incorporates React hooks.
 
 ## **Features**
