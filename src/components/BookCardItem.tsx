@@ -65,6 +65,12 @@ const BookCardItemComponent = styled.li`
     font-weight: 700;
     margin-top: 16px;
     margin-bottom: 10px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    width: 200px;
+    text-align: center;
+    text-overflow: ellipsis;
   }
 
   p {

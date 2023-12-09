@@ -9,12 +9,13 @@ import { Label, Modal, Button } from './ui';
 import { flexbox } from 'styles/utils';
 import { stringToColor } from 'common/utils/stringToColor';
 import { extractTitleAndFormat } from 'common/utils/extractTitleAndFormat';
+import BookForm from './BookForm';
 
 interface CoverImgProps {
   $imageUrl: string;
 }
 
-const ImagePreloader = ({ coverURL, title }: any) => {
+export const ImagePreloader = ({ coverURL, title }: any) => {
   const [isLoaded, setIsLoaded] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const ImagePreloader = ({ coverURL, title }: any) => {
 
 export default function DetailModal() {
   const [modal, setModal] = useState<string | null>(null);
+  const [editMode, setEditMode] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const booklist = useSelector((state: RootState) => state.booklist);
@@ -82,37 +84,50 @@ export default function DetailModal() {
 
   const handleCloseModal = () => {
     setModal(null);
+    setEditMode(false);
     navigate(`/`);
   };
 
   return (
     <Modal onClose={handleCloseModal}>
-      <DetailComponent>
-        <div>
-          <h3>{title}</h3>
-          <Label>{category}</Label>
-          <Description
-            dangerouslySetInnerHTML={{
-              __html: description.replace(/\n/g, '<br>'),
-            }}
-          />
-          <p className="price">{`$ ${price}`}</p>
-        </div>
-        {/* <div>{!!coverURL && <CoverImg $imageUrl={coverURL} />}</div> */}
-        <div>
-          <ImagePreloader coverURL={coverURL} title={title} />
-        </div>
-      </DetailComponent>
-      <Footer>
-        <Button size="large">Modify</Button>
-        <Button
-          size="large"
-          layoutVariant="outlined"
-          onClick={handleCloseModal}
-        >
-          Close
-        </Button>
-      </Footer>
+      {!editMode && (
+        <>
+          <DetailComponent>
+            <div>
+              <h3>{title}</h3>
+              <Label>{category}</Label>
+              <Description
+                dangerouslySetInnerHTML={{
+                  __html: description.replace(/\n/g, '<br>'),
+                }}
+              />
+              <p className="price">{`$ ${price}`}</p>
+            </div>
+            <div>
+              <ImagePreloader coverURL={coverURL} title={title} />
+            </div>
+          </DetailComponent>
+          <Footer>
+            <Button size="large" onClick={() => setEditMode(true)}>
+              Modify
+            </Button>
+            <Button
+              size="large"
+              layoutVariant="outlined"
+              onClick={handleCloseModal}
+            >
+              Close
+            </Button>
+          </Footer>
+        </>
+      )}
+      {editMode && (
+        <BookForm
+          finishEditMode={() => setEditMode(false)}
+          book={book}
+          onClose={handleCloseModal}
+        />
+      )}
     </Modal>
   );
 }
