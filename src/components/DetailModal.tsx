@@ -7,10 +7,54 @@ import { IBook, RootState } from 'store/store';
 
 import { Label, Modal, Button } from './ui';
 import { flexbox } from 'styles/utils';
+import { stringToColor } from 'common/utils/stringToColor';
+import { extractTitleAndFormat } from 'common/utils/extractTitleAndFormat';
 
 interface CoverImgProps {
   $imageUrl: string;
 }
+
+const ImagePreloader = ({ coverURL, title }: any) => {
+  const [isLoaded, setIsLoaded] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (!coverURL || coverURL?.length === 0) {
+      setIsLoaded(false);
+      return;
+    }
+
+    const img = new Image();
+
+    img.onload = () => {
+      setIsLoaded(true);
+    };
+
+    img.onerror = () => {
+      setIsLoaded(false);
+    };
+
+    img.src = coverURL;
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [coverURL]);
+
+  if (isLoaded === true) {
+    return <CoverImg $imageUrl={coverURL} />;
+  }
+
+  if (isLoaded === false) {
+    return (
+      <CoverText $bg={stringToColor(title)}>
+        <div>{extractTitleAndFormat(title)}</div>
+      </CoverText>
+    );
+  }
+
+  return <></>;
+};
 
 export default function DetailModal() {
   const [modal, setModal] = useState<string | null>(null);
@@ -19,8 +63,14 @@ export default function DetailModal() {
   const booklist = useSelector((state: RootState) => state.booklist);
 
   useEffect(() => {
-    id && setModal(id);
-  }, [id]);
+    const book = booklist.find((book) => book.id === Number(id)) as IBook;
+
+    if (id && book) {
+      id && setModal(id);
+    } else {
+      navigate(`/`);
+    }
+  }, [id, navigate, booklist]);
 
   if (!modal) {
     return null;
@@ -48,7 +98,10 @@ export default function DetailModal() {
           />
           <p className="price">{`$ ${price}`}</p>
         </div>
-        <div>{!!coverURL && <CoverImg $imageUrl={coverURL} />}</div>
+        {/* <div>{!!coverURL && <CoverImg $imageUrl={coverURL} />}</div> */}
+        <div>
+          <ImagePreloader coverURL={coverURL} title={title} />
+        </div>
       </DetailComponent>
       <Footer>
         <Button size="large">Modify</Button>
@@ -112,4 +165,23 @@ const CoverImg = styled.div<CoverImgProps>`
   background-size: cover;
   background-position: center;
   transform: translateY(20px);
+`;
+
+const CoverText = styled.div<{ $bg: string }>`
+  ${flexbox()};
+  width: 161px;
+  height: 226px;
+  border-radius: 10px;
+  background-color: ${(props) => stringToColor(props.$bg)};
+
+  & > div {
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    line-height: 100px;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 800;
+  }
 `;

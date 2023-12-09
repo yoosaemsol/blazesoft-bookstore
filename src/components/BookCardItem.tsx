@@ -1,10 +1,14 @@
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 import { RiDeleteBin2Fill } from 'react-icons/ri';
+
+import { IBook } from 'store/store';
 import { Label } from './ui';
 import { flexbox } from 'styles/utils';
-import { IBook } from 'store/store';
-import { useNavigate } from 'react-router';
+import { stringToColor } from 'common/utils/stringToColor';
+import { extractTitleAndFormat } from 'common/utils/extractTitleAndFormat';
+import { useImageLoading } from 'common/hooks/useImageLoading';
 
 interface BookListItemProps {
   book: IBook;
@@ -16,6 +20,9 @@ interface CoverImgProps {
 
 export default function BookCardItem({ book }: BookListItemProps) {
   const { id, title, price, category, coverURL = '' } = book;
+
+  const { isCoverLoading, isCoverAvailable } = useImageLoading(coverURL);
+
   const navigate = useNavigate();
 
   const handleBookClick = (id: number) => {
@@ -28,7 +35,12 @@ export default function BookCardItem({ book }: BookListItemProps) {
 
   return (
     <BookCardItemComponent onClick={() => handleBookClick(id)}>
-      {!!coverURL && <CoverImg $imageUrl={coverURL} />}
+      {!isCoverLoading && isCoverAvailable && <CoverImg $imageUrl={coverURL} />}
+      {!isCoverLoading && !isCoverAvailable && (
+        <CoverText $bg={stringToColor(title)}>
+          <div>{extractTitleAndFormat(title)}</div>
+        </CoverText>
+      )}
       <h3>{title}</h3>
       <Label>{category}</Label>
       <p>{`$ ${price}`}</p>
@@ -71,6 +83,25 @@ const BookCardItemComponent = styled.li`
 
   &:hover button {
     opacity: 1;
+  }
+`;
+
+const CoverText = styled.div<{ $bg: string }>`
+  ${flexbox()};
+  width: 210px;
+  height: 310px;
+  border-radius: 10px;
+  background-color: ${(props) => stringToColor(props.$bg)};
+
+  & > div {
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    line-height: 100px;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 800;
   }
 `;
 

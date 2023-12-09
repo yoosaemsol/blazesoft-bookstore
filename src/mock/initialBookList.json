@@ -8,6 +8,14 @@
     "coverURL": "https://res.cloudinary.com/djvbl7f0n/image/upload/v1701897931/atomic-habit_jg6mbh.avif"
   },
   {
+    "id": 11,
+    "title": "Hello Habits",
+    "category": "Business",
+    "price": "36.00",
+    "description": "The #1 New York Times bestseller. Over 10 million copies sold!\n\nTiny Changes, Remarkable Results\n\nNo matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.",
+    "coverURL": ""
+  },
+  {
     "id": 2,
     "title": "HOLLY",
     "category": "Fiction",
