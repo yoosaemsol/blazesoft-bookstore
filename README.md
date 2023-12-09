@@ -31,3 +31,17 @@ This project is a single-page application developed using React, Redux, and Serv
 
 - **Typescript:** The project includes Typescript for improved code readability and maintainability.
 - **Github Repository:** The code is hosted on a public Github repository for easy access and review.
+
+<br/>
+
+## **Quick Start** 💡
+
+1. Install packages
+```
+$ yarn install
+```
+
+2. Run
+```
+$ yarn start
+```
