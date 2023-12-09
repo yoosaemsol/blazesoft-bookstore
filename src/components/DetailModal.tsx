@@ -65,14 +65,16 @@ export default function DetailModal() {
   const booklist = useSelector((state: RootState) => state.booklist);
 
   useEffect(() => {
-    const book = booklist.find((book) => book.id === Number(id)) as IBook;
+    const book = booklist.find(
+      (book: IBook) => book.id === Number(id)
+    ) as IBook;
 
     if (id && book) {
       id && setModal(id);
     }
   }, [id, navigate, booklist]);
 
-  const book = booklist?.find((book) => book.id === Number(id)) as IBook;
+  const book = booklist?.find((book: IBook) => book.id === Number(id)) as IBook;
 
   if (!modal || !book) {
     return null;

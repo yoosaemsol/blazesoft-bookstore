@@ -18,17 +18,23 @@ const booklist = createSlice({
     },
     add: (state, action) => {
       state.push(action.payload);
+      saveState(state);
     },
     edit: (state, action: PayloadAction<IBook>) => {
       const { id, ...updatedFields } = action.payload;
-      const bookToUpdate = state.find((book) => book.id === id);
+      const bookToUpdate = state.find((book: IBook) => book.id === id);
 
       if (bookToUpdate) {
         Object.assign(bookToUpdate, updatedFields);
+        saveState(state);
       }
     },
     remove: (state, action: PayloadAction<number>) => {
-      return state.filter((book) => book.id !== action.payload);
+      const newState = state.filter(
+        (book: IBook) => book.id !== action.payload
+      );
+      saveState(newState);
+      return newState;
     },
   },
 });
@@ -44,3 +50,25 @@ export const { init, add, edit, remove } = booklist.actions;
 export type RootState = ReturnType<typeof store.getState>;
 
 export default store;
+
+export function loadState() {
+  try {
+    const serializedState = localStorage.getItem('booklist_state');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (error) {
+    console.error('Error loading state from localStorage:', error);
+    return undefined;
+  }
+}
+
+function saveState(state: IBook[]) {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('booklist_state', serializedState);
+  } catch (error) {
+    console.error('Error saving state to localStorage:', error);
+  }
+}

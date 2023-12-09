@@ -10,7 +10,7 @@ import { Button, Modal, Page } from 'components/ui';
 import { flexbox } from 'styles/utils';
 import initialBookList from 'mock/initialBookList.json';
 import BookListItem from 'components/BookListItem';
-import { init, RootState } from 'store/store';
+import { IBook, init, loadState, RootState } from 'store/store';
 import DetailModal from 'components/DetailModal';
 import BookForm from 'components/BookForm';
 
@@ -30,7 +30,9 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(init(initialBookList));
+    const loadedData = loadState();
+
+    dispatch(init(loadedData ? loadedData : initialBookList));
   }, [dispatch]);
 
   return (
@@ -50,7 +52,7 @@ export default function Home() {
         <Button onClick={handleAddBookClick}>ADD BOOK</Button>
       </ControlsContainer>
       <BooksContainer $viewType={viewType}>
-        {booklist?.map((book) =>
+        {booklist?.map((book: IBook) =>
           viewType === 'card' ? (
             <BookCardItem key={book.id} book={book} />
           ) : (
