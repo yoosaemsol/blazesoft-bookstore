@@ -69,18 +69,16 @@ export default function DetailModal() {
 
     if (id && book) {
       id && setModal(id);
-    } else {
-      navigate(`/`);
     }
   }, [id, navigate, booklist]);
 
-  if (!modal) {
+  const book = booklist?.find((book) => book.id === Number(id)) as IBook;
+
+  if (!modal || !book) {
     return null;
   }
 
-  const book = booklist.find((book) => book.id === Number(id)) as IBook;
-
-  const { title, description, category, price, coverURL } = book;
+  const { title, description, category, price, coverURL } = book || {};
 
   const handleCloseModal = () => {
     setModal(null);
