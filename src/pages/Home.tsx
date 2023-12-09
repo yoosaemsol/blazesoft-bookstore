@@ -6,22 +6,26 @@ import { BsList } from 'react-icons/bs';
 import { MdOutlineGridView } from 'react-icons/md';
 
 import BookCardItem from 'components/BookCardItem';
-import { Button, Modal, Page } from 'components/ui';
+import { Button, LoadingSpinner, Modal, Page } from 'components/ui';
 import { flexbox } from 'styles/utils';
 import initialBookList from 'mock/initialBookList.json';
 import BookListItem from 'components/BookListItem';
-import { init, RootState } from 'store/store';
+import { IBook, init, loadState, RootState } from 'store/store';
 import DetailModal from 'components/DetailModal';
 import BookForm from 'components/BookForm';
+import { loadViewType, saveViewType } from 'common/utils/viewTypeStorageUtils';
+
+type viewType = 'card' | 'list' | undefined;
 
 export default function Home() {
-  const [viewType, setViewType] = useState<'card' | 'list'>('card');
+  const [viewType, setViewType] = useState<viewType>(undefined);
   const [onAddForm, setOnAddForm] = useState(false);
 
   const booklist = useSelector((state: RootState) => state.booklist);
   const dispatch = useDispatch();
 
-  const handleViewTypeChange = (type: 'card' | 'list') => {
+  const handleViewTypeChange = (type: viewType) => {
+    saveViewType(type);
     setViewType(type);
   };
 
@@ -30,8 +34,16 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(init(initialBookList));
+    const loadedData = loadState();
+    const loadedViewType = loadViewType();
+
+    dispatch(init(loadedData ? loadedData : initialBookList));
+    setViewType(loadedViewType || 'card');
   }, [dispatch]);
+
+  if (!viewType) {
+    return <LoadingSpinner size="50px" />;
+  }
 
   return (
     <Page>
@@ -49,15 +61,17 @@ export default function Home() {
         </ViewTypeIcons>
         <Button onClick={handleAddBookClick}>ADD BOOK</Button>
       </ControlsContainer>
-      <BooksContainer $viewType={viewType}>
-        {booklist?.map((book) =>
-          viewType === 'card' ? (
-            <BookCardItem key={book.id} book={book} />
-          ) : (
-            <BookListItem key={book.id} book={book} />
-          )
-        )}
-      </BooksContainer>
+      {!!viewType && (
+        <BooksContainer $viewType={viewType}>
+          {booklist?.map((book: IBook) =>
+            viewType === 'card' ? (
+              <BookCardItem key={book.id} book={book} />
+            ) : (
+              <BookListItem key={book.id} book={book} />
+            )
+          )}
+        </BooksContainer>
+      )}
       <DetailModal />
       {onAddForm && (
         <Modal onClose={() => setOnAddForm(false)}>
@@ -99,7 +113,7 @@ const ControlsContainer = styled.div`
   border-radius: 5px;
 `;
 
-const BooksContainer = styled.ul<{ $viewType: 'card' | 'list' }>`
+const BooksContainer = styled.ul<{ $viewType: viewType }>`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
